@@ -12,75 +12,53 @@
 
 #include "get_next_line.h"
 #include "libft/libft.h"
-/*static int ft_len_buff(int fd,char *buff, char x)
-{
-	int k;
-	k = 0;
-	read(fd, buff, x);
-	k = ft_strlen(buff);
-	close (fd);
-	return (k);
-}*/
-static int ft_str_buffer(int fd , char *buff , int x)
-{
-	int k;
-	k = 0;
 
-	while (buff[k] != EOF)
+/*static int ft_next(char *s1, int k)
+{
+	int b;
+	b = 0;
+	//if (s1[0] == '\0')
+	//	return (1);
+	while (b < k)
 	{
-		read(fd , buff , x);
-		k++;
-	}	
-	close(fd);
-	return (k);
-}
+		if (s1[b] == '\n')
+			return (1);
+		b++;
+	}
+	return (0);	
+}*/
 int get_next_line(const int fd, char **line)
 {
 	char *buff;
-	int k;
-	int j;
-	//size_t m;
-	int x;
-	//int p;
+	int total;
 	char *here;
-	k = 0;
+	int j;
+	ssize_t x;
+	int p;
+	
 	j = 0;
+	p = 1;
+	total = 0;
+	x = BUFF_SIZE;
 	here = "test1";
 	line = &here;
-	x = BUFF_SIZE;
-	buff = ft_memalloc(21);
-	//read(fd,buff,BUFF_SIZE);
-	/*while (fd != EOF j < ft_str )
+	buff = ft_memalloc(x);
+	p = read(fd, buff, x);
+	//printf("%s" , buff);
+	while (p > 0)
 	{
-	   read(fd, buff,21);
-		printf("%s\n" , buff);
-		//ft_strclr(buff);
-		j++;
-	}*/
-	//read(fd , buff , BUFF_SIZE);
-	k = ft_str_buffer(fd,buff, x);
-	printf("Value of k : %d\n" , k);
-	//m = ft_len_buff(fd,buff,x);
-	//printf("Value of len: %zu\n" , m);
-	//p = k / (int)m;
-	//printf("Value of p: %d\n" , p);
-	//ft_strclr(buff);
-	
-	while (j <= 9)
-	{
-		read(fd, buff,10);
-		printf("%s\n" , buff);
-		j++;
+		//printf("%s" , buff);
+		//total = total + ft_next(buff ,x);
+		p = read(fd, buff,x);
+		if (p != 0 && buff[x - 1] != '\0')
+			printf(" BUFF :%s\n" , buff);
+		else
+			break ;
+		//printf("%s" , buff);
 	}
-	/*while ( j <= m)
-	  {
-		  read(fd, buff, k);
-		//printf("char : %c\n" , *buff);
-		printf("BUFF : %s\n" , buff);
-		//printf("Value of j :%d\n" , j);
-		//ft_putstr(buff);
-		j++;
-	}*/
-	close(fd);
-	return (3);
+//	printf("\nSize of buff : %zu\n" , ft_strlen(buff));
+//	printf("Number of n : %d\n" , total);	
+	//close(fd);
+	free(buff);
+	return (0);
 }

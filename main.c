@@ -22,7 +22,7 @@ int		main(void)
 	x = open("myfile.txt" , O_RDONLY);
 	if (x == -1)
 	{
-		ft_putstr("faili\n");
+		//ft_putstr("faili\n");
 		exit(1);
 	}	
 	line1= "name";
