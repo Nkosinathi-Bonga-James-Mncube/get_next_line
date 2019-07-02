@@ -6,14 +6,14 @@
 /*   By: nmncube <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 10:26:54 by nmncube           #+#    #+#             */
-/*   Updated: 2019/06/29 02:51:04 by nmncube          ###   ########.fr       */
+/*   Updated: 2019/07/02 16:34:28 by nmncube          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include "libft/libft.h"
 
-/*static int ft_next(char *s1, int k)
+static int ft_next(char *s1, int k)
 {
 	int b;
 	b = 0;
@@ -26,39 +26,51 @@
 		b++;
 	}
 	return (0);	
-}*/
+}
+/*char *ft_str(char *buff,char *here,int x)
+{
+	int b;
+	char temp[x];
+	ft_memalloc(temp);
+	b = 0;
+	while (buff[b] != '\n')
+	{
+		buff[]	
+		b++;
+	}
+	return ()
+	free(temp);
+}*/	
 int get_next_line(const int fd, char **line)
 {
 	char *buff;
-	int total;
 	char *here;
-	int j;
-	ssize_t x;
+	int x;
 	int p;
 	
-	j = 0;
-	p = 1;
-	total = 0;
-	x = BUFF_SIZE;
-	here = "test1";
-	line = &here;
-	buff = ft_memalloc(x);
-	p = read(fd, buff, x);
-	//printf("%s" , buff);
-	while (p > 0)
+	x = 1;
+	buff = ft_strnew(BUFF_SIZE);
+	here = ft_strnew(BUFF_SIZE);
+	p = read(fd, buff, BUFF_SIZE);
+	here = ft_strcpy(here, buff);
+	while(x != 2)
 	{
-		//printf("%s" , buff);
-		//total = total + ft_next(buff ,x);
-		p = read(fd, buff,x);
-		if (p != 0 && buff[x - 1] != '\0')
-			printf(" BUFF :%s\n" , buff);
-		else
-			break ;
-		//printf("%s" , buff);
+		p = read(fd, buff, BUFF_SIZE);
+		//printf("BUFF : %s\n" , here);
+		//if (ft_next(buff, BUFF_SIZE))
+		//{
+			
+		//	x++;
+		//}else
+			here = ft_strjoin(here, buff);
+		if (ft_next(buff,BUFF_SIZE))
+			x++;
+		//free(buff);
 	}
-//	printf("\nSize of buff : %zu\n" , ft_strlen(buff));
-//	printf("Number of n : %d\n" , total);	
-	//close(fd);
-	free(buff);
+	printf("%s" , here);
 	return (0);
 }
+
+
+// remember while reading your file... do this within a while loop with the condition
+// while(ft_strchr(buff, '\n') == NULL)
