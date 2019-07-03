@@ -16,14 +16,9 @@
 int		main(void)
 {
 	int x;
-	char*line1;
 	char **line2;
 
 	x = open("myfile.txt" , O_RDONLY);
-
-	while (open ("myfile.txt", O_RDONLY) > 0)
-	{
-		get_next_line(x, &*line2);
-	}
+	get_next_line(x, &*line2);
 	return (0);
 }

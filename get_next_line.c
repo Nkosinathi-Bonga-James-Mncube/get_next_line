@@ -12,8 +12,22 @@
 
 #include "get_next_line.h"
 #include "libft/libft.h"
-
-static int ft_next(char *s1, int k)
+/*int ft_r_len(int fd)
+{
+	int k;
+	char *buff2;
+	buff2 = ft_strnew(1);
+	k = 0;
+	while (read(fd, buff2,1) > 0)
+	{
+		if (ft_next(buff2,1) == 0)
+			k++;
+		else
+		break ;
+	}
+	return (k);
+}*/
+int ft_next(char *s1, int k)
 {
 	int b;
 	b = 0;
@@ -27,47 +41,109 @@ static int ft_next(char *s1, int k)
 	}
 	return (0);	
 }
-/*char *ft_str(char *buff,char *here,int x)
+/*char *ft_str_k(char *here , char *buff)
 {
 	int b;
-	char temp[x];
-	ft_memalloc(temp);
-	b = 0;
-	while (buff[b] != '\n')
+	size_t k;
+
+	k = 0;
+	while (buff[k] != '\n')
+		k++;
+	k++;
+	here=ft_strncpy(here,buff, k);
+	while (*buff != '\n')
+		buff++;
+	//printf("\nNumber of char : %d\n" , k);
+	return (here);
+}*/
+
+int ft_hold (char *s)
+{
+	int k;
+	k = 0;
+	k = ft_strlen(s);
+	return (k);
+}
+void ft_r_len( char *here, int fd)
+{
+	int k;
+	char *buff2;
+	buff2 = ft_strnew(1);
+	k = 0;
+	while (buff2[k] != '\n')
 	{
-		buff[]	
-		b++;
+		read(fd, buff2 , 1);
+		if (ft_next(buff2,1) == 0)
+		{
+			here = ft_strjoin(here,(char*)buff2);
+			k++;
+		}
+		else
+		break ;
 	}
-	return ()
-	free(temp);
-}*/	
+	//here = ft_strjoin( (char*)buff2,here);
+	ft_hold(here);
+	return (here);
+	//printf("%s" , here);
+}
+
 int get_next_line(const int fd, char **line)
 {
 	char *buff;
+	char *buff3;
 	char *here;
 	int x;
 	int p;
-	
+	int b;
+	char *f;
+	int j;	
 	x = 1;
-	buff = ft_strnew(BUFF_SIZE);
-	here = ft_strnew(BUFF_SIZE);
-	p = read(fd, buff, BUFF_SIZE);
+	b = 0;
+	j = BUFF_SIZE;
+	buff3 = ft_strnew(1);
+	ft_r_len(buff3,fd);
+	//read(fd,buff,1);
+	if (j > ft_hold)
+		j = f;
+	printf("Value of hold : %d\n" , j);
+	//buff = ft_strnew(j);
+	//here = ft_strnew(j);
+	//free(buff);
+	//p = read(fd, buff, BUFF_SIZE);
+	//printf("\nsize of %ld" , ft_strlen(buff));
+	/*if (j < f)
 	here = ft_strcpy(here, buff);
-	while(x != 2)
+	else
+		here = ft_u*/
+	/*while(x != 2)
 	{
 		p = read(fd, buff, BUFF_SIZE);
 		//printf("BUFF : %s\n" , here);
 		//if (ft_next(buff, BUFF_SIZE))
 		//{
 			
-		//	x++;
-		//}else
-			here = ft_strjoin(here, buff);
+		//x++;
+		//}
+		//else
+		here = ft_strjoin(here, buff);
 		if (ft_next(buff,BUFF_SIZE))
+		{
+			//printf(" \nBUFF :%s" , buff);
+			here = ft_str_k(buff , here);
+			//free(buff);
+			//printf("\nsize of %ld" , sizeof(buff));
+			//printf("\n");
 			x++;
+		}
 		//free(buff);
 	}
-	printf("%s" , here);
+	/*while (b < 32)
+	{
+		printf("BUFF :%c , %d\n" ,buff[b], buff[b]);
+		b++;
+	}*/
+	//printf("%s" , here);
+	//printf("\nSize of sentence : %d\n" , f);
 	return (0);
 }
 
