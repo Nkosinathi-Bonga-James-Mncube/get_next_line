@@ -6,27 +6,14 @@
 /*   By: nmncube <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 10:26:54 by nmncube           #+#    #+#             */
-/*   Updated: 2019/07/02 16:34:28 by nmncube          ###   ########.fr       */
+/*   Updated: 2019/07/03 13:03:29 by nmncube          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include "libft/libft.h"
-/*int ft_r_len(int fd)
-{
-	int k;
-	char *buff2;
-	buff2 = ft_strnew(1);
-	k = 0;
-	while (read(fd, buff2,1) > 0)
-	{
-		if (ft_next(buff2,1) == 0)
-			k++;
-		else
-		break ;
-	}
-	return (k);
-}*/
+
+//char ft_join(char s1, char s1)
 int ft_next(char *s1, int k)
 {
 	int b;
@@ -41,109 +28,51 @@ int ft_next(char *s1, int k)
 	}
 	return (0);	
 }
-/*char *ft_str_k(char *here , char *buff)
+char *ft_join(char *buff, char *here)
 {
-	int b;
-	size_t k;
+	static int k;
 
 	k = 0;
-	while (buff[k] != '\n')
-		k++;
-	k++;
-	here=ft_strncpy(here,buff, k);
-	while (*buff != '\n')
-		buff++;
-	//printf("\nNumber of char : %d\n" , k);
-	return (here);
-}*/
-
-int ft_hold (char *s)
-{
-	int k;
-	k = 0;
-	k = ft_strlen(s);
-	return (k);
-}
-void ft_r_len( char *here, int fd)
-{
-	int k;
-	char *buff2;
-	buff2 = ft_strnew(1);
-	k = 0;
-	while (buff2[k] != '\n')
+	while (buff[k] != '\n' && k < BUFF_SIZE)
 	{
-		read(fd, buff2 , 1);
-		if (ft_next(buff2,1) == 0)
-		{
-			here = ft_strjoin(here,(char*)buff2);
-			k++;
-		}
-		else
-		break ;
+		//printf("BUFF %c\n" , buff[k]);
+		//here = ft_strjoin(here,buff);
+		//printf("Here value %s\n" , temp);
+		if (buff[k] == '\n')
+			return (NULL);
+		//ft_bzero((char*)buff[k] , 1);
+		k++;
 	}
-	//here = ft_strjoin( (char*)buff2,here);
-	ft_hold(here);
+	here = ft_realloc(here, BUFF_SIZE * 2);
+	here = ft_strjoin(here,buff);
+	printf("Current value of :%s\n" ,here);
 	return (here);
-	//printf("%s" , here);
 }
-
 int get_next_line(const int fd, char **line)
 {
-	char *buff;
-	char *buff3;
 	char *here;
-	int x;
-	int p;
-	int b;
-	char *f;
-	int j;	
-	x = 1;
-	b = 0;
-	j = BUFF_SIZE;
-	buff3 = ft_strnew(1);
-	ft_r_len(buff3,fd);
-	//read(fd,buff,1);
-	if (j > ft_hold)
-		j = f;
-	printf("Value of hold : %d\n" , j);
-	//buff = ft_strnew(j);
-	//here = ft_strnew(j);
-	//free(buff);
-	//p = read(fd, buff, BUFF_SIZE);
-	//printf("\nsize of %ld" , ft_strlen(buff));
-	/*if (j < f)
+	char *done;
+	int k;
+	static char *buff;
+
+	k = 0;
+	here = ft_strnew(BUFF_SIZE);
+	buff = ft_strnew(BUFF_SIZE);
+	read (fd, buff, BUFF_SIZE);
+	done = ft_strnew(BUFF_SIZE);
 	here = ft_strcpy(here, buff);
-	else
-		here = ft_u*/
-	/*while(x != 2)
+	//printf("Here value : %s" , here);
+	while (ft_next(buff, BUFF_SIZE) != 1)
 	{
-		p = read(fd, buff, BUFF_SIZE);
-		//printf("BUFF : %s\n" , here);
-		//if (ft_next(buff, BUFF_SIZE))
-		//{
-			
-		//x++;
-		//}
-		//else
-		here = ft_strjoin(here, buff);
-		if (ft_next(buff,BUFF_SIZE))
-		{
-			//printf(" \nBUFF :%s" , buff);
-			here = ft_str_k(buff , here);
-			//free(buff);
-			//printf("\nsize of %ld" , sizeof(buff));
-			//printf("\n");
-			x++;
-		}
-		//free(buff);
+		read(fd , buff , BUFF_SIZE);
+		//line[0] = ft_join(buff, here);
+		ft_realloc(done , BUFF_SIZE * 2);
+		done  = ft_join(buff, here);
 	}
-	/*while (b < 32)
-	{
-		printf("BUFF :%c , %d\n" ,buff[b], buff[b]);
-		b++;
-	}*/
-	//printf("%s" , here);
-	//printf("\nSize of sentence : %d\n" , f);
+	//line[0] = "nathi";
+	//line[1] = "hello";
+	printf("Line values: %s" , done);
+	//printf("BUFF : %s" , line[1]);
 	return (0);
 }
 
