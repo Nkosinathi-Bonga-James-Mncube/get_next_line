@@ -6,7 +6,7 @@
 /*   By: nmncube <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 14:30:11 by nmncube           #+#    #+#             */
-/*   Updated: 2019/07/02 16:34:06 by nmncube          ###   ########.fr       */
+/*   Updated: 2019/07/04 15:56:00 by nmncube          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,12 @@ int		main(void)
 
 	x = open("myfile.txt" , O_RDONLY);
 	get_next_line(x, &*line2);
+	//get_next_line(x, &*line2);
+	//get_next_line(x, &*line2);
+	//get_next_line(x, &*line2);
+	//get_next_line(x, &*line2);
+	//get_next_line(x, &*line2);
+	//get_next_line(x, &*line2);
+	//get_next_line(x, &*line2);
 	return (0);
 }

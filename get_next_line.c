@@ -6,20 +6,19 @@
 /*   By: nmncube <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 10:26:54 by nmncube           #+#    #+#             */
-/*   Updated: 2019/07/03 13:03:29 by nmncube          ###   ########.fr       */
+/*   Updated: 2019/07/04 15:55:57 by nmncube          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include "libft/libft.h"
-
+#include <stdio.h>
 //char ft_join(char s1, char s1)
 int ft_next(char *s1, int k)
 {
 	int b;
+
 	b = 0;
-	//if (s1[0] == '\0')
-	//	return (1);
 	while (b < k)
 	{
 		if (s1[b] == '\n')
@@ -28,54 +27,69 @@ int ft_next(char *s1, int k)
 	}
 	return (0);	
 }
-char *ft_join(char *buff, char *here)
+char *ft_word(char *here ,int fd)
 {
-	static int k;
-
+	int k;
+	int j;
+	static char *word;
+	int bfound;
+	char temp[BUFF_SIZE];
+	word =  ft_strnew(BUFF_SIZE);
 	k = 0;
-	while (buff[k] != '\n' && k < BUFF_SIZE)
+	j = 0;
+	bfound = 0;
+	while (word[k] != '\n')
 	{
-		//printf("BUFF %c\n" , buff[k]);
-		//here = ft_strjoin(here,buff);
-		//printf("Here value %s\n" , temp);
-		if (buff[k] == '\n')
-			return (NULL);
-		//ft_bzero((char*)buff[k] , 1);
-		k++;
+		//if ()
+		read (fd, word, BUFF_SIZE);
+		if (ft_next(word , BUFF_SIZE) == 0)
+		{
+			here = ft_strjoin(here , (char*)word);
+			k++;
+		}
+		else
+		{
+			bfound = 1;
+			break ;
+		}
 	}
-	here = ft_realloc(here, BUFF_SIZE * 2);
-	here = ft_strjoin(here,buff);
-	printf("Current value of :%s\n" ,here);
+	if (bfound == 1)
+	{
+		while (word[j] != '\n')
+		{
+			temp[j] = word[j];
+			j++;
+		}
+		here = ft_strjoin(here , temp);
+	}
+	//ft_bzero(temp, BUFF_SIZE);
+	word = ft_strsub(word,j + 1, BUFF_SIZE);
+	//here = ft_strjoin(here ,word);
+	printf("%s\n" , here);
+	printf("%s" , word);
+	free(word);
 	return (here);
 }
 int get_next_line(const int fd, char **line)
 {
 	char *here;
-	char *done;
+	char *name;
 	int k;
-	static char *buff;
-
 	k = 0;
+	//line = &name;
+	//read(fd, buff)
 	here = ft_strnew(BUFF_SIZE);
-	buff = ft_strnew(BUFF_SIZE);
-	read (fd, buff, BUFF_SIZE);
-	done = ft_strnew(BUFF_SIZE);
-	here = ft_strcpy(here, buff);
-	//printf("Here value : %s" , here);
-	while (ft_next(buff, BUFF_SIZE) != 1)
+
+	if (fd != 0)
 	{
-		read(fd , buff , BUFF_SIZE);
-		//line[0] = ft_join(buff, here);
-		ft_realloc(done , BUFF_SIZE * 2);
-		done  = ft_join(buff, here);
+		line[k] = *ft_strsplit(ft_word(here ,fd) , '\n');
 	}
-	//line[0] = "nathi";
-	//line[1] = "hello";
-	printf("Line values: %s" , done);
-	//printf("BUFF : %s" , line[1]);
+	//k = 0;
+	//printf("Store [%d] : %s" , k,line[k]);
+	free(here);
 	return (0);
 }
-
+//free ft_strsplit.c
 
 // remember while reading your file... do this within a while loop with the condition
 // while(ft_strchr(buff, '\n') == NULL)
