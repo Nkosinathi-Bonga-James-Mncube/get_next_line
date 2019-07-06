@@ -6,7 +6,7 @@
 /*   By: nmncube <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 10:26:54 by nmncube           #+#    #+#             */
-/*   Updated: 2019/07/04 15:55:57 by nmncube          ###   ########.fr       */
+/*   Updated: 2019/07/06 06:10:16 by nmncube          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,69 +27,92 @@ int ft_next(char *s1, int k)
 	}
 	return (0);	
 }
-char *ft_word(char *here ,int fd)
+char *ft_first(char *temp , char *buff)
 {
 	int k;
-	int j;
-	static char *word;
-	int bfound;
-	char temp[BUFF_SIZE];
-	word =  ft_strnew(BUFF_SIZE);
+	char *s;
 	k = 0;
-	j = 0;
-	bfound = 0;
-	while (word[k] != '\n')
+	//printf("%s" , buff);
+	while (buff[k] != '\n')
 	{
-		//if ()
-		read (fd, word, BUFF_SIZE);
-		if (ft_next(word , BUFF_SIZE) == 0)
-		{
-			here = ft_strjoin(here , (char*)word);
-			k++;
-		}
-		else
-		{
-			bfound = 1;
-			break ;
-		}
+		temp[k] = buff[k];
+		k++;
 	}
-	if (bfound == 1)
-	{
-		while (word[j] != '\n')
+	//s = ft_strtrim(temp);
+	//free(temp);
+	//printf("%s\n" , temp);
+	return (temp);
+}
+char *ft_second(char *second , char *buff)
+{
+	int j;
+	int x;
+	j = 0;
+	//printf("%s" , buff);
+	//x = 0;
+	while (buff[j] != '\n')
+		j++;
+	j++;
+	//x = BUFF_SIZE - j;
+	while (j < BUFF_SIZE)
 		{
-			temp[j] = word[j];
+			second[j] = buff[j];
 			j++;
 		}
-		here = ft_strjoin(here , temp);
+	//printf("%s" , second);
+	return (second);
+}
+char *ft_join( char *here, char *buff)
+{
+	char temp[BUFF_SIZE+ 1];
+	char second[BUFF_SIZE +1];	
+	//printf("%s" , here);	
+	if (ft_next(buff , BUFF_SIZE) < 1)
+	{
+		here = ft_strcpy(buff, buff);
+		//here = ft_strjoin(here, buff);
+		//printf("%s" , here);
 	}
-	//ft_bzero(temp, BUFF_SIZE);
-	word = ft_strsub(word,j + 1, BUFF_SIZE);
-	//here = ft_strjoin(here ,word);
-	printf("%s\n" , here);
-	printf("%s" , word);
-	free(word);
+	else
+	{
+		//printf("im here!!!");
+		//printf("%s" , buff);
+		here = ft_strcpy(buff , ft_first(temp , buff));
+		//here = ft_strjoin(here, ft_first(temp, buff));
+		//printf("%s" , here);
+		//here =  ft_strcpy(buff , ft_second(second , buff));
+		//here = ft_strjoin(here, ft_second(second,buff));
+		//prinft("Part2 ,");
+	}
+	printf("%s" , here);
+	//here = ft_strjoin(here , buff);	
 	return (here);
 }
 int get_next_line(const int fd, char **line)
 {
-	char *here;
-	char *name;
-	int k;
-	k = 0;
-	//line = &name;
-	//read(fd, buff)
-	here = ft_strnew(BUFF_SIZE);
-
-	if (fd != 0)
+	static char buff[BUFF_SIZE];
+	static char here[BUFF_SIZE];
+	int k = 0;
+	static int j = 0;
+	line = (char**)malloc(sizeof(char*));
+	*line =  ft_memalloc(BUFF_SIZE);
+	//buff = ft_strnew(BUFF_SIZE);
+	read(fd, buff, BUFF_SIZE);
+	while (fd != 0)
 	{
-		line[k] = *ft_strsplit(ft_word(here ,fd) , '\n');
+		ft_join(here, buff);
+		//read(fd , buff , BUFF_SIZE);
+		if (ft_next(buff , BUFF_SIZE) < 1)
+			break ;
+		read(fd , buff, BUFF_SIZE);
+		//read(fd , buff , BUFF_SIZE);
+		//k++;
 	}
-	//k = 0;
-	//printf("Store [%d] : %s" , k,line[k]);
-	free(here);
+	j++;
+	//printf("%s" , here);
 	return (0);
 }
-//free ft_strsplit.c
+/*free ft_strsplit.c
 
-// remember while reading your file... do this within a while loop with the condition
-// while(ft_strchr(buff, '\n') == NULL)
+remember while reading your file... do this within a while loop with the condition
+while(ft_strchr(buff, '\n') == NULL)*/
