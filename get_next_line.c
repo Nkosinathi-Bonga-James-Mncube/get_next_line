@@ -6,7 +6,7 @@
 /*   By: nmncube <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 10:26:54 by nmncube           #+#    #+#             */
-/*   Updated: 2019/07/06 06:10:16 by nmncube          ###   ########.fr       */
+/*   Updated: 2019/07/08 16:53:17 by nmncube          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,23 @@ int ft_next(char *s1, int k)
 	{
 		if (s1[b] == '\n')
 			return (1);
+		if (s1[b] == '\0')
+			return (-1);
 		b++;
 	}
 	return (0);	
 }
-char *ft_first(char *temp , char *buff)
+char* ft_first( char *buff, size_t x,char *here)
 {
-	int k;
-	char *s;
-	k = 0;
-	//printf("%s" , buff);
-	while (buff[k] != '\n')
+	int j;
+	j = 0;
+	while (buff[j] != '\n')
 	{
-		temp[k] = buff[k];
-		k++;
+		here[x] = buff[j];
+		x++;
+		j++;
 	}
-	//s = ft_strtrim(temp);
-	//free(temp);
-	//printf("%s\n" , temp);
-	return (temp);
+	return (here);
 }
 char *ft_second(char *second , char *buff)
 {
@@ -59,56 +57,64 @@ char *ft_second(char *second , char *buff)
 			second[j] = buff[j];
 			j++;
 		}
-	//printf("%s" , second);
+	printf("%s" , second);
 	return (second);
 }
-char *ft_join( char *here, char *buff)
+char *ft_join( int fd, char *here, char *buff)
 {
+	int x;
+	static int m;
 	char temp[BUFF_SIZE+ 1];
 	char second[BUFF_SIZE +1];	
-	//printf("%s" , here);	
-	if (ft_next(buff , BUFF_SIZE) < 1)
-	{
-		here = ft_strcpy(buff, buff);
-		//here = ft_strjoin(here, buff);
+	
+	x = 0;
+	if (m == 1)
+		printf("%s" , here);
+	x = ft_next(buff , BUFF_SIZE); 
+	while ( x < 1)
+	{ 
+		//x = ft_next(buff , BUFF_SIZE); 
+		here = ft_strjoin(here, buff);
+		read(fd , buff , BUFF_SIZE);
 		//printf("%s" , here);
+		x = ft_next(buff , BUFF_SIZE); 
 	}
-	else
+//	printf("%s" , here);	
+	if ( x  ==  1)
 	{
 		//printf("im here!!!");
 		//printf("%s" , buff);
-		here = ft_strcpy(buff , ft_first(temp , buff));
-		//here = ft_strjoin(here, ft_first(temp, buff));
+		//while (here[m] != '\0')
+		//	m++;	
+		here = ft_first(buff, ft_strlen(here),here);
 		//printf("%s" , here);
 		//here =  ft_strcpy(buff , ft_second(second , buff));
-		//here = ft_strjoin(here, ft_second(second,buff));
+		//ft_second(second,buff);
 		//prinft("Part2 ,");
+	
 	}
-	printf("%s" , here);
+	printf(" [%d] %s\n" ,m, here);
+	//printf("%lu" , ft_strlen(here));
+	//printf("\nExtra :%s" , buff);
 	//here = ft_strjoin(here , buff);	
+	m = m + 1;
 	return (here);
 }
 int get_next_line(const int fd, char **line)
 {
-	static char buff[BUFF_SIZE];
-	static char here[BUFF_SIZE];
-	int k = 0;
-	static int j = 0;
+	static char buff[BUFF_SIZE + 1];
+	static char here[BUFF_SIZE + 1];
 	line = (char**)malloc(sizeof(char*));
 	*line =  ft_memalloc(BUFF_SIZE);
 	//buff = ft_strnew(BUFF_SIZE);
 	read(fd, buff, BUFF_SIZE);
-	while (fd != 0)
+	if (fd != 0)
 	{
-		ft_join(here, buff);
+		ft_join(fd ,here, buff);
 		//read(fd , buff , BUFF_SIZE);
 		if (ft_next(buff , BUFF_SIZE) < 1)
-			break ;
-		read(fd , buff, BUFF_SIZE);
-		//read(fd , buff , BUFF_SIZE);
-		//k++;
+		return (0);
 	}
-	j++;
 	//printf("%s" , here);
 	return (0);
 }
