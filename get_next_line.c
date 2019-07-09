@@ -6,14 +6,14 @@
 /*   By: nmncube <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 10:26:54 by nmncube           #+#    #+#             */
-/*   Updated: 2019/07/08 16:53:17 by nmncube          ###   ########.fr       */
+/*   Updated: 2019/07/09 16:46:57 by nmncube          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include "libft/libft.h"
 #include <stdio.h>
-//char ft_join(char s1, char s1)
+
 int ft_next(char *s1, int k)
 {
 	int b;
@@ -33,87 +33,90 @@ char* ft_first( char *buff, size_t x,char *here)
 {
 	int j;
 	j = 0;
+	int y;
+	y = 0;
+	//printf("%s\n" , here);
+	/*while (buff[y] != '\n')
+	{
+		here[y] = 'y';
+		y++;
+	}*/
+	//printf("%s\n",here);
+	//printf("%s" , buff);
+	//printf("%c" , here[x -1]);
+	//ft_strclr(here);
 	while (buff[j] != '\n')
 	{
 		here[x] = buff[j];
+		//printf("%c" , here[x]);
 		x++;
 		j++;
 	}
+	//printf("%s\n" , here);
 	return (here);
 }
-char *ft_second(char *second , char *buff)
+char *ft_second(char *here , char *buff)
 {
 	int j;
 	int x;
 	j = 0;
-	//printf("%s" , buff);
-	//x = 0;
+	x = 0;
+	ft_strclr(here);
 	while (buff[j] != '\n')
 		j++;
 	j++;
-	//x = BUFF_SIZE - j;
-	while (j < BUFF_SIZE)
-		{
-			second[j] = buff[j];
-			j++;
-		}
-	printf("%s" , second);
-	return (second);
+	while (buff[j] !='\0')
+	{
+		here[x] = buff[j];
+		j++;
+		x++;
+	}
+	return (here);
 }
 char *ft_join( int fd, char *here, char *buff)
 {
 	int x;
-	static int m;
-	char temp[BUFF_SIZE+ 1];
-	char second[BUFF_SIZE +1];	
-	
+	static int m;//<- dont need this .Testing only
+	static char temp[BUFF_SIZE+ 1];	
 	x = 0;
-	if (m == 1)
-		printf("%s" , here);
+	here = temp;
 	x = ft_next(buff , BUFF_SIZE); 
 	while ( x < 1)
 	{ 
-		//x = ft_next(buff , BUFF_SIZE); 
 		here = ft_strjoin(here, buff);
 		read(fd , buff , BUFF_SIZE);
-		//printf("%s" , here);
-		x = ft_next(buff , BUFF_SIZE); 
+		x = ft_next(buff , BUFF_SIZE);
 	}
-//	printf("%s" , here);	
+	//printf("%s" , here);	
 	if ( x  ==  1)
 	{
-		//printf("im here!!!");
-		//printf("%s" , buff);
-		//while (here[m] != '\0')
-		//	m++;	
+		//printf("im here");
 		here = ft_first(buff, ft_strlen(here),here);
-		//printf("%s" , here);
-		//here =  ft_strcpy(buff , ft_second(second , buff));
-		//ft_second(second,buff);
-		//prinft("Part2 ,");
-	
 	}
-	printf(" [%d] %s\n" ,m, here);
-	//printf("%lu" , ft_strlen(here));
-	//printf("\nExtra :%s" , buff);
-	//here = ft_strjoin(here , buff);	
-	m = m + 1;
+	//printf("[%d]%s\n" ,m, here);//<- dont need this .Testing only
+	here = ft_second(here, buff);
+	here = ft_strcpy(temp, here);
+	m = m + 1;//<- dont need this .Testing only
 	return (here);
 }
 int get_next_line(const int fd, char **line)
 {
-	static char buff[BUFF_SIZE + 1];
+	static char buff[BUFF_SIZE + 1];//remove static?
 	static char here[BUFF_SIZE + 1];
+	//ft_strclr(here);
+	int q;
+	q = 0;
 	line = (char**)malloc(sizeof(char*));
 	*line =  ft_memalloc(BUFF_SIZE);
-	//buff = ft_strnew(BUFF_SIZE);
 	read(fd, buff, BUFF_SIZE);
+	//printf("%s" ,  buff);
+	//if (BUFF_SIZE == 0)
+	//	return (here) // < - need help here
 	if (fd != 0)
 	{
+		//if (ft_next(buff , BUFF_SIZE) == 1)
+		//	return (0);
 		ft_join(fd ,here, buff);
-		//read(fd , buff , BUFF_SIZE);
-		if (ft_next(buff , BUFF_SIZE) < 1)
-		return (0);
 	}
 	//printf("%s" , here);
 	return (0);
