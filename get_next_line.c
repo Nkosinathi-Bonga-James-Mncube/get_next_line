@@ -6,7 +6,7 @@
 /*   By: nmncube <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 10:26:54 by nmncube           #+#    #+#             */
-/*   Updated: 2019/07/09 16:46:57 by nmncube          ###   ########.fr       */
+/*   Updated: 2019/07/10 16:10:43 by nmncube          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ int ft_next(char *s1, int k)
 	{
 		if (s1[b] == '\n')
 			return (1);
-		if (s1[b] == '\0')
-			return (-1);
 		b++;
 	}
 	return (0);	
@@ -35,25 +33,22 @@ char* ft_first( char *buff, size_t x,char *here)
 	j = 0;
 	int y;
 	y = 0;
+	char *temp2;
+
 	//printf("%s\n" , here);
-	/*while (buff[y] != '\n')
-	{
-		here[y] = 'y';
+	//if ()
+	//printf("%s %d\n" , here, ft_next(here , BUFF_SIZE));
+	while (buff[y] != '\n')
 		y++;
-	}*/
-	//printf("%s\n",here);
-	//printf("%s" , buff);
-	//printf("%c" , here[x -1]);
-	//ft_strclr(here);
+	temp2 = ft_memalloc(ft_strlen(here) + y);
+	ft_strcpy(temp2, here);
 	while (buff[j] != '\n')
 	{
-		here[x] = buff[j];
-		//printf("%c" , here[x]);
+		temp2[x] = buff[j];
 		x++;
 		j++;
 	}
-	//printf("%s\n" , here);
-	return (here);
+	return (temp2);
 }
 char *ft_second(char *here , char *buff)
 {
@@ -79,8 +74,15 @@ char *ft_join( int fd, char *here, char *buff)
 	static int m;//<- dont need this .Testing only
 	static char temp[BUFF_SIZE+ 1];	
 	x = 0;
-	here = temp;
+	//ft_strcpy(here , temp);i< - beter
+	here = temp;	
 	x = ft_next(buff , BUFF_SIZE); 
+	printf("->%s" , here);
+	/*if( ft_next(here , BUFF_SIZE) == 1)
+	{
+		printf("im here");
+	}*/
+	//printf("B:%s", buff);
 	while ( x < 1)
 	{ 
 		here = ft_strjoin(here, buff);
@@ -89,13 +91,12 @@ char *ft_join( int fd, char *here, char *buff)
 	}
 	//printf("%s" , here);	
 	if ( x  ==  1)
-	{
-		//printf("im here");
 		here = ft_first(buff, ft_strlen(here),here);
-	}
 	//printf("[%d]%s\n" ,m, here);//<- dont need this .Testing only
+	//if (ft_)
 	here = ft_second(here, buff);
 	here = ft_strcpy(temp, here);
+	//printf("%s\n" , here);
 	m = m + 1;//<- dont need this .Testing only
 	return (here);
 }

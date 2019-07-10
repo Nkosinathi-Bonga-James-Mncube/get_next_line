@@ -1,6 +1,6 @@
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-#define BUFF_SIZE 11// issue with buff size 11
+#define BUFF_SIZE 26// issue with buff size 11//issue with buff 26
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
