@@ -22,7 +22,7 @@ int		main(void)
 	get_next_line(x, &*line2);
 	get_next_line(x, &*line2);
 	get_next_line(x, &*line2); //< - here
-	//get_next_line(x, &*line2);
+	get_next_line(x, &*line2);
 	//get_next_line(x, &*line2);
 	//get_next_line(x, &*line2);
 	//get_next_line(x, &*line2);

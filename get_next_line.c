@@ -60,12 +60,13 @@ char *ft_second(char *here , char *buff)
 	while (buff[j] != '\n')
 		j++;
 	j++;
-	while (buff[j] !='\0')
+	while (buff[j] !='\0')//ft_strcpy
 	{
 		here[x] = buff[j];
 		j++;
 		x++;
 	}
+	//printf("%s" , here);
 	return (here);
 }
 char *ft_join( int fd, char *here, char *buff)
@@ -77,11 +78,23 @@ char *ft_join( int fd, char *here, char *buff)
 	//ft_strcpy(here , temp);i< - beter
 	here = temp;	
 	x = ft_next(buff , BUFF_SIZE); 
-	printf("->%s" , here);
-	/*if( ft_next(here , BUFF_SIZE) == 1)
+	//printf("-->%s" , buff);
+	//printf("->%s" , here);
+	if( ft_next(here , BUFF_SIZE) == 1)
 	{
-		printf("im here");
-	}*/
+		//printf("%s" , here);
+		//printf("im here");
+		//ft_first(here,)
+		buff = ft_second(buff, here);//<- issue with storing in buff
+		//printf("%s" ,buff);
+		//temp = ft_strcpy(temp, buff);
+		//ft_strclr(buff);
+		//here=ft_first(here,0,buff);
+		printf("[%d]%s\n" ,m, here);
+		here = ft_strcpy(temp,buff);
+		return (0);
+		//printf("%s" , here);
+	}
 	//printf("B:%s", buff);
 	while ( x < 1)
 	{ 
