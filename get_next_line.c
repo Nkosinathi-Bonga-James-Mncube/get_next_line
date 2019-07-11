@@ -6,7 +6,7 @@
 /*   By: nmncube <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 10:26:54 by nmncube           #+#    #+#             */
-/*   Updated: 2019/07/10 16:10:43 by nmncube          ###   ########.fr       */
+/*   Updated: 2019/07/11 14:57:36 by nmncube          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,16 @@ char* ft_first( char *buff, size_t x,char *here)
 	while (buff[y] != '\n')
 		y++;
 	temp2 = ft_memalloc(ft_strlen(here) + y);
-	ft_strcpy(temp2, here);
+	//printf("%s" ,buff);
+	if (ft_next(here ,BUFF_SIZE ) != 1)
+		ft_strcpy(temp2, here); //<- COMMENT BACK IF ISSUES OCCUR !!!!/Orginal working before 100
 	while (buff[j] != '\n')
 	{
 		temp2[x] = buff[j];
 		x++;
 		j++;
 	}
+	//printf("%s\n" ,temp2);
 	return (temp2);
 }
 char *ft_second(char *here , char *buff)
@@ -74,6 +77,7 @@ char *ft_join( int fd, char *here, char *buff)
 	int x;
 	static int m;//<- dont need this .Testing only
 	static char temp[BUFF_SIZE+ 1];	
+	char *tt;
 	x = 0;
 	//ft_strcpy(here , temp);i< - beter
 	here = temp;	
@@ -84,32 +88,31 @@ char *ft_join( int fd, char *here, char *buff)
 	{
 		//printf("%s" , here);
 		//printf("im here");
-		//ft_first(here,)
-		buff = ft_second(buff, here);//<- issue with storing in buff
-		//printf("%s" ,buff);
-		//temp = ft_strcpy(temp, buff);
-		//ft_strclr(buff);
-		//here=ft_first(here,0,buff);
-		printf("[%d]%s\n" ,m, here);
-		here = ft_strcpy(temp,buff);
-		return (0);
+		m = m + 1;//<- dont need this .Testing only 
+		tt = ft_memalloc(BUFF_SIZE);
+		tt = ft_second(tt, here);//<- issue with storing in buff
+		//printf("%s" ,tt);
+		here=ft_first(here,0,tt);
 		//printf("%s" , here);
+		//printf("[%d]%s\n" ,m, here);
+		ft_strclr(temp);
+		here = ft_strcpy(temp , tt);
+		here = temp;
+		here = ft_strjoin(here,buff);
+		here = ft_strcpy(temp, here);
+		return (0);
 	}
-	//printf("B:%s", buff);
 	while ( x < 1)
 	{ 
 		here = ft_strjoin(here, buff);
 		read(fd , buff , BUFF_SIZE);
 		x = ft_next(buff , BUFF_SIZE);
 	}
-	//printf("%s" , here);	
 	if ( x  ==  1)
 		here = ft_first(buff, ft_strlen(here),here);
-	//printf("[%d]%s\n" ,m, here);//<- dont need this .Testing only
-	//if (ft_)
+	printf("[%d]%s\n" ,m, here);//<- dont need this .Testing only
 	here = ft_second(here, buff);
 	here = ft_strcpy(temp, here);
-	//printf("%s\n" , here);
 	m = m + 1;//<- dont need this .Testing only
 	return (here);
 }
