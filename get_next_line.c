@@ -48,56 +48,120 @@ char *ft_join( int fd, char *temp,char *here, char *buff)
 	//k = 0;
 	p = 0;
 	m = 0;
-	//printf("%s" , temp);
+	//printf("-->%s" , temp);
 	//printf("%s" , buff);
 	here = temp;
 	out = ft_memalloc(BUFF_SIZE);
 	read(fd , buff , BUFF_SIZE);
-	//printf("%s" , buff);
+	//printf("-->%s" , buff);
 	x = ft_next(buff, BUFF_SIZE);	
+	
+	
+	if (ft_next(here , BUFF_SIZE) == 1) //<-using
+	{
+		//printf("%s" , here);
+		//printf("%s" , buff);
+		p = ft_count(here);
+		out =ft_strncpy(out , here , p);
+		printf("%s\n" , out);// < - here
+		p = p + 1;
+		///ft_strclr(temp);//think i need this
+		//temp = ft_strjoin((char*)&here[p], buff);
+		here = ft_strcpy(temp, (char*)&here[p]);
+		here=ft_strjoin(temp , buff);
+		here = ft_strcpy(temp , here);
+		//printf("%s" , out);
+		//printf("%s" , here);
+		m = m+1;
+		//printf("%s" , buff);
+		return (here);
+	}
 	while ( x != 1 && m == 0)
 	{ 
-		//printf("im here");
+		//printf("-->%s" ,buff);
 		here = ft_strjoin(here, buff);
 		//printf("%s\n" , here);
 		read(fd , buff , BUFF_SIZE);
 		x = ft_next(buff, BUFF_SIZE);
 		m = 0;
 	}
-	printf("%s" , here);
+	//printf("%s" , here);
 	//printf("%s" , buff);
-	while(x == 1 && ft_next(here, BUFF_SIZE) != 1)
+	
+	/*if (ft_next(here , BUFF_SIZE) == 1)
 	{
+		//printf("%s" , here);
+		p = ft_count(here);
+		out =ft_strncpy(out , here , p);
+		printf("%s\n" , out);// < - here
+		p = p + 1;
+		ft_strclr(temp);//not sure if need this
+		here = ft_strcpy(temp, (char*)&here[p]);
+		m = m+1;
+		//printf("%s" , out);
+		x = 0;
+	}*/	
+	while((x == 1) && ft_next(here, BUFF_SIZE) != 1)
+	{
+		//printf("-->%s" , buff);
+		//printf("%s" , here);	
 		//printf("im here");
 		p = ft_count(buff);
-		//printf("%d" , p);
+		//printf("[%d]" , p);
 		//printf("%s" , buff);
 		out = ft_strncpy(out ,buff,p);
-		//printf("%s" , out);
+		//printf("-->%s\n" , out);
 		here = ft_strjoin(here, out);
 		free(out);
-		//printf("%s\n" , here);
+		printf("%s\n" , here); //<- here
 		p = p + 1;
 		ft_strclr(temp);
 		here = ft_strcpy(temp , (char*)&buff[p]);
-		//printf("%s" , temp);
+		//printf("-->%s" , temp);
 		m = m + 1;     
-	   x = ft_next(here , BUFF_SIZE);	
+	   	x = ft_next(here , BUFF_SIZE);
+   		return (here);//<-additional	   
 	}
+	/*if (ft_next(here , BUFF_SIZE) == 1) //<-using
+	{
+		//printf("%s" , here);
+		p = ft_count(here);
+		out =ft_strncpy(out , here , p);
+		//printf("%s\n" , out);// < - here
+		p = p + 1;
+		ft_strclr(temp);//think i need this
+		here = ft_strcpy(temp, (char*)&here[p]);
+		//printf("%s" , temp);
+		return (out);
+	}*/
 	//printf("%s" , here);
 	return (here);
 }
 int get_next_line(const int fd, char **line)
 {
+	int k;
+	int x;
+	k = 0;
+	x = BUFF_SIZE;
 	static char temp[BUFF_SIZE + 1];
 	static char here[BUFF_SIZE + 1]; 
-	char buff[BUFF_SIZE + 1];
-	ft_strclr(temp);
-	ft_strclr(here);
+	char buff[x + 1];
+
+	while (x >= k)
+	{
+		buff[k] = '\0';
+		here[k] = '\0';
+		k++;
+	}
+	//printf("%s" , buff);
+	//ft_strclr(temp);
+	//ft_strclr(here);
+	//ft_strclr(buff)
 	if (fd != 0)
 	{
 		ft_join(fd ,temp,here, buff);
 	}
+	//printf("%s" , buff); 
 	return (0);
 }
 /*free ft_strsplit.c
