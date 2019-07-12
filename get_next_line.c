@@ -48,6 +48,7 @@ char *ft_join( int fd, char *temp,char *here, char *buff)
 	//k = 0;
 	p = 0;
 	m = 0;
+	//^-^
 	//printf("-->%s" , temp);
 	//printf("%s" , buff);
 	here = temp;
