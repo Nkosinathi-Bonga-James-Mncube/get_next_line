@@ -56,7 +56,8 @@ char *ft_join( int fd, char *temp,char *here, char *buff)
 	//printf("-->%s" , buff);
 	x = ft_next(buff, BUFF_SIZE);	
 	
-	
+	//if (ft_next(her,BUFF_SIZE)== -1)
+	//	return(here);//<-solution	
 	if (ft_next(here , BUFF_SIZE) == 1) //<-using
 	{
 		//printf("%s" , here);
@@ -71,13 +72,19 @@ char *ft_join( int fd, char *temp,char *here, char *buff)
 		here=ft_strjoin(temp , buff);
 		here = ft_strcpy(temp , here);
 		//printf("%s" , out);
-		//printf("%s" , here);
+		//printf("-->%s" , here);
 		m = m+1;
-		//printf("%s" , buff);
+		//printf("-->%s" , buff);
 		return (here);
+	}
+	if (ft_next(buff ,BUFF_SIZE) == -1)
+	{
+		printf("%s" ,temp);
+		return (temp);
 	}
 	while ( x != 1 && m == 0)
 	{ 
+		//printf("here+");
 		//printf("-->%s" ,buff);
 		here = ft_strjoin(here, buff);
 		//printf("%s\n" , here);
@@ -85,24 +92,10 @@ char *ft_join( int fd, char *temp,char *here, char *buff)
 		x = ft_next(buff, BUFF_SIZE);
 		m = 0;
 	}
-	//printf("%s" , here);
-	//printf("%s" , buff);
 	
-	/*if (ft_next(here , BUFF_SIZE) == 1)
-	{
-		//printf("%s" , here);
-		p = ft_count(here);
-		out =ft_strncpy(out , here , p);
-		printf("%s\n" , out);// < - here
-		p = p + 1;
-		ft_strclr(temp);//not sure if need this
-		here = ft_strcpy(temp, (char*)&here[p]);
-		m = m+1;
-		//printf("%s" , out);
-		x = 0;
-	}*/	
 	while((x == 1) && ft_next(here, BUFF_SIZE) != 1)
 	{
+		//printf("here2-");
 		//printf("-->%s" , buff);
 		//printf("%s" , here);	
 		//printf("im here");
@@ -120,21 +113,8 @@ char *ft_join( int fd, char *temp,char *here, char *buff)
 		//printf("-->%s" , temp);
 		m = m + 1;     
 	   	x = ft_next(here , BUFF_SIZE);
-   		return (here);//<-additional	   
+   		//return (here);//<-additional	   
 	}
-	/*if (ft_next(here , BUFF_SIZE) == 1) //<-using
-	{
-		//printf("%s" , here);
-		p = ft_count(here);
-		out =ft_strncpy(out , here , p);
-		//printf("%s\n" , out);// < - here
-		p = p + 1;
-		ft_strclr(temp);//think i need this
-		here = ft_strcpy(temp, (char*)&here[p]);
-		//printf("%s" , temp);
-		return (out);
-	}*/
-	//printf("%s" , here);
 	return (here);
 }
 int get_next_line(const int fd, char **line)
