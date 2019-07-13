@@ -6,7 +6,7 @@
 #    By: nmncube <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/28 12:32:02 by nmncube           #+#    #+#              #
-#    Updated: 2019/06/28 14:45:35 by nmncube          ###   ########.fr        #
+#    Updated: 2019/07/02 12:38:15 by nmncube          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRC  = get_next_line.c main.c
 
 LIB = libft/libft.a
 
-FLAGS = -Wall -Werror -Wextra -o
+FLAGS = -o
 
 all: $(NAME)
 	
