@@ -6,7 +6,7 @@
 /*   By: nmncube <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 10:26:54 by nmncube           #+#    #+#             */
-/*   Updated: 2019/07/14 15:32:54 by nmncube          ###   ########.fr       */
+/*   Updated: 2019/07/14 15:35:21 by nmncube          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int get_next_line(const int fd, char **line)
 	int p;
 	static char temp[BUFF_SIZE + 1];
 	char here[BUFF_SIZE + 1];
-	
+
 	ft_bzero(here, BUFF_SIZE +1);
 	p = 1;
 	if (BUFF_SIZE <= 0)
