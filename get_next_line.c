@@ -6,7 +6,7 @@
 /*   By: nmncube <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 10:26:54 by nmncube           #+#    #+#             */
-/*   Updated: 2019/07/16 11:17:58 by nmncube          ###   ########.fr       */
+/*   Updated: 2019/07/17 13:00:47 by nmncube          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int get_next_line(const int fd, char **line)
 	ft_bzero(here, BUFF_SIZE +1);
 	ft_bzero(buff, BUFF_SIZE + 1);
 	p = 0;
-	if (BUFF_SIZE <= 0)
+	if (fd < 0 || !line || BUFF_SIZE < 0)
 		return (-1);//<- is it correct
 	p = ft_join(fd ,temp,here,buff,line);
 	//free(line);
