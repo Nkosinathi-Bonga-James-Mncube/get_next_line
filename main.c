@@ -1,35 +1,14 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: nmncube <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/28 14:30:11 by nmncube           #+#    #+#             */
-/*   Updated: 2019/07/17 11:26:22 by nmncube          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "get_next_line.h"
-#include "libft/libft.h"
 
-int		main(void)
+int	main(int argc, char**argv)
 {
-	int x = 0;
-	int b;
-	b = 1;
-	char **line2;
-	line2 = (char**)malloc(sizeof(char*));
-	x = open("bible.txt" , O_RDONLY);
-	while (b!= 0)
+	char *line2;
+	int fd;
+
+	fd = open (argv[1], O_RDONLY);
+	while (get_next_line(fd,&line2) > 0)
 	{
-		if (b == 0 || b == -1)
-		break ;
-		b = get_next_line(x, &*line2);
-		
-		if (b!= 0)
-			printf("%s\n",line2[0]);
+		printf("%s\n", line2);
 	}
-	free(line2);
 	return (0);
 }
