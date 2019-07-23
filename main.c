@@ -14,8 +14,8 @@ int	main(int argc, char**argv)
 		//printf("%d\n" ,x);
 		free(line2);
 	}
-	while (1)
+//	while (1)
 	{
-	}
+	}//
 	return (0);
 }
