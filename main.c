@@ -1,21 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmncube <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/24 11:18:12 by nmncube           #+#    #+#             */
+/*   Updated: 2019/07/24 11:21:33 by nmncube          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-int	main(int argc, char**argv)
+int	main(int argc, char **argv)
 {
-	char *line2;
-	int fd;
-	int x;
+	char	*line2;
+	int		fd;
+	int		x;
 
-	fd = open (argv[1], O_RDONLY);
-	//get_next_line(fd , &line2);
-	while (get_next_line(fd,&line2) > 0)
+	fd = open(argv[1], O_RDONLY);
+	while ((x = get_next_line(fd, &line2)) > 0)
 	{
 		printf("%s\n", line2);
-		//printf("%d\n" ,x);
 		free(line2);
 	}
-//	while (1)
-	{
-	}//
 	return (0);
 }
