@@ -1,4 +1,4 @@
-NAME = run
+NAME = run.a
 
 SRC = get_next_line.c main.c
 
@@ -10,6 +10,7 @@ all: $(NAME)
 
 $(NAME): $(LIB)
 		gcc $(FLAGS) $(NAME) $(SRC) $(LIB)
+		rm -f a.out
 $(LIB):
 	make re -C libft
 clean:

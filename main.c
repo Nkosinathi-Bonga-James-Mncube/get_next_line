@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
+#include "libft/libft.h"
 int	main(int argc, char **argv)
 {
 	char	*line2;
@@ -21,7 +21,8 @@ int	main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	while ((x = get_next_line(fd, &line2)) > 0)
 	{
-		printf("%s\n", line2);
+		ft_putstr(line2);
+		ft_putchar('\n');
 		free(line2);
 	}
 	return (0);
