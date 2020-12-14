@@ -32,7 +32,7 @@
  ```
  fd = file descriptor used | line = the pointer used to store line read
  - Your function `get_next_line()` must return its result without `\n`
- - To get a full project detailed outline, please refer to the [pdf](https://drive.google.com/file/d/14zgjjrF6lV5T90iCVkL3s2zNRqKDXAoM/view?usp=sharing)
+ - To get a full project outline, please refer to the [pdf](https://drive.google.com/file/d/14zgjjrF6lV5T90iCVkL3s2zNRqKDXAoM/view?usp=sharing)
  ***
  # How it works
  The main goal of the project is to replicate the function [fgets()](https://www.tutorialspoint.com/c_standard_library/c_function_fgets.htm) to read a line from a texfile similar to the  example code. 
