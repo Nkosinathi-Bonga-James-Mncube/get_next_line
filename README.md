@@ -3,7 +3,7 @@
 
 
 ![wtc](https://user-images.githubusercontent.com/50704452/101298456-b6ba8a80-3836-11eb-8d68-e8e74b8897f5.gif) ![42](https://user-images.githubusercontent.com/50704452/101329754-77159200-387a-11eb-8c1a-c929b9050800.png)
-- `get_next_line`(GNL) is a program that is able to read from a textfile and display each line ending with a newline character. This this project done with only using `read()`, `malloc()`,`free()` and our own library [libft](https://github.com/Nkosinathi-Bonga-James-Mncube/libft) we build previously.
+- `get_next_line()`(GNL) is a program that is able to read from a textfile and display each line ending with a newline character. This this project done with only using `read()`, `malloc()`,`free()` and our own library [libft](https://github.com/Nkosinathi-Bonga-James-Mncube/libft) we build previously.
 - Project done at WeThinkCode JHB campus (based on 42 france coding curriculum)
 ***
 - More info on WeThinkCode: https://www.wethinkcode.co.za/
